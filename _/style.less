@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+
+@brand-primary: red;
+@brand-info: cyan;
+@yellow: #fd6;
+@light: #f0f0f0;
+
+.v(@p, @v){
+	-webkit-@{p}: @v;
+	@{p}: @v;
+}
+
+/*	Panel */
+.fr-offcanvas--is-ready {
+	background-color: #fff;
+	height: 100%;
+	left: 100%;
+	overflow: auto;
+	max-width: 425px;
+	position: fixed;
+	top: 0;
+	transform: translateX(0);
+	width: 100%;
+	will-change: translateX;
+}
+
+/*	Panel - Visible */
+.fr-offcanvas--is-ready[aria-hidden="false"] {
+	transform: translateX(-100%);
+}
+
+*, *:after, *:before{
+	box-sizing: border-box;
+}
+body{
+	font-family: Raleway, "Helvetica Neue", Arial, sans-serif;
+	font-weight: 600;
+	font-size: 30px;
+	color: #333;
+	margin: 0;
+	padding: 0;
+	line-height: 1.4;
+}
+
+#main{
+	max-width: 1140px;
+	margin: 0 auto;
+	padding: 0 30px;	
+	min-height: 100vh;
+}
+
+.wrap-inner{
+	width: 1140px;
+	margin: auto;
+	max-width: 100%;
+}
+
+ul{
+	margin: 20px 0;
+}
+
+header,section{
+padding: 3.5em 0;
+}
+
+p{}
+
+.main-area{
+	h1,h2,h3,h4,h5,h6{
+		text-transform: uppercase;
+		font-weight: 800;
+		em{
+			font-weight: 900;
+			font-style: normal;
+			color: #999;
+		}
+		big{
+		    box-shadow: 0 3px #ccc;
+		    margin-bottom: 5px;
+		    display: inline-block;
+		    padding-bottom: 5px;		
+		}
+	}
+
+	h2{
+		position: relative;
+		&:after{
+			position: absolute;
+			content: "";
+			bottom: -.75em; left: 0;
+			width: 3em;
+			height: 5px;
+			background-color: #888;
+		}
+		margin-bottom: 1.25em;
+	}
+	table{
+		border-collapse: collapse;
+		color: #555;
+		width: 100%;
+		border-bottom: 2px solid #ebebea;
+		margin-bottom: 32px;
+
+		tr{
+			th{
+				text-align: left;
+				color: #333;			
+			}
+			td, th{			
+				padding: 10px;
+				border-top: 1px solid #ebebea;
+			}
+			&:nth-child(even){
+				td, th{
+					background: #fbfbfa;
+				}
+			}
+		}
+		thead{
+			background: #6f5499;				
+			border-radius: 4px;
+			overflow: hidden;
+			tr td, tr th{
+				position: relative;
+				padding: 12px 10px;
+				color: white;
+				box-shadow: 0 1px #6f5499;
+				z-index: 10;
+			}
+			small{
+				font-weight: normal;
+			}		
+		}
+	}
+}
+	.group{
+		display: inline-block;
+		vertical-align: top;
+		&+&{
+			margin-left: 5em;
+		}
+	}
+
+// code{
+//     display: inline-block;
+//     padding: 1px 3px;
+//     background: @light;
+//     color: #666;
+//     font-size: 0.9em;
+//     border-radius: 4px;
+// 	&.code-title{
+// 		font-weight: bold;
+// 		padding: 3px 0;
+// 		background: fade(#ff0, 50);
+// 		font-size: 1em;
+// 	}
+// }
+code:first-line {
+    line-height: 0;
+	
+}
+pre, code{
+	background: @light;
+	border-radius: 5px;
+	// border: .1em solid #d3d3d3;
+	padding: .5em .75em .75em;
+	display: inline-block;
+	min-width: 60vw;
+	color: #333;
+	line-height: 1.5;
+	font-weight: 500;
+	font-family: Ubuntu Mono;
+	letter-spacing: -0.05em;
+	white-space: pre;
+	c{
+		opacity: .5;
+	}
+}
+
+.box{
+	min-height: 200px;
+	background: @light;
+	margin: 15px 0;
+	&.bad{
+		background: @brand-info;
+		min-height: 199px;
+	}
+	&.small{
+		min-height: 100px;
+	}
+}
+
+section.js-fr-offcanvas{	
+	background: @yellow;
+	visibility: hidden;
+	transition: .2s;
+	padding: 60px 30px 30px;
+	font-size: 20px;
+	outline: 0 none;
+	box-shadow: 0 0 25px fade(black, 25);
+	// border: 1px solid fade(black, 8);
+	box-shadow: 0 0 0 100vw rgba(70, 90, 110, 0.75);
+	ul{
+		padding: 0;
+		margin: 0;
+	}
+	li{
+		list-style-type:  none;
+	    line-height: 1;
+	    padding: .25em 0;
+	}
+	&::-webkit-scrollbar {
+	    width: 0px;
+	}
+	 
+	&::-webkit-scrollbar-track {
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+	    border-radius: 10px;
+	}
+	 
+	&::-webkit-scrollbar-thumb {
+	    border-radius: 10px;
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+	}
+}
+
+h1{
+	// border-top: 5px solid;
+	border-bottom: 5px solid;	
+	text-align: center;
+	font-weight: 800;
+	// font-size: 2.25em;
+    font-size: 3.25em;
+	padding: .75em 0;
+	// box-shadow: 0 .5em @yellow, 0 -.5em @yellow;
+	box-shadow: 0 15px 50px fade(black,15);
+    background: white;
+    max-width: 800px;
+    margin: auto;
+}
+
+span.code{
+	font-family: Ubuntu Mono;
+	font-size: 1.2;
+	color: #666;
+	text-decoration: underline;
+}
+
+
+
+main{
+	strong{
+		color: #222;
+		font-weight: 800;
+	}
+}
+
+#menu-close{
+	position: absolute;
+	right: 9999px;
+}
+#menu-open{
+    display: block;
+	position: fixed;
+	top: 0; right: 0;
+	cursor: pointer;    
+    height: 2.1em;
+    width: 2.1em;
+    font-size: 1em;
+    opacity: .65;
+    background: transparent;
+    border: 0 none;
+    outline: 0 none;
+    border-radius: .1em;
+    
+    z-index: 10;
+    &:hover{
+		opacity: .75;
+        background: fade(black, 7)
+    }
+    &:active, &.open{
+    	opacity: 1;
+    }
+    &:active{
+    	background: fade(black, 10)
+    }
+
+	&:before, &:after {
+	  	content: "";
+	  	position: absolute;
+	    // top: .65em;
+    	top: 1em;
+	    left: 0; right: 0;
+	    width: auto; height: 0.10em;
+	    margin: 0 .6em; padding: 0 .35em;
+	    .v(transition, all .125s);
+	}
+	&:before {
+    	background: black;
+	   //     0 0.3125em 0 0 black,
+	   //     0 0.625em 0 0 black;
+		@shadow: 
+		   0 0.3em 0 0 black, 
+		   0 -0.3em 0 0 black;    
+		.v(box-shadow, @shadow);
+	}
+	&.open{
+		&:before{
+			.v(box-shadow, none);
+			.v(transform, rotate(45deg));
+		}
+		&:after{
+			.v(transform, rotate(-45deg));
+			background: black;
+		}
+	}
+}
+#main{
+	&[v-cloak]{
+		display: none;
+	}
+}
+
+#navigation{
+	font-size: 16px;
+	z-index: 9;
+
+	h1,h2,h3,h4,h5,h6{
+		margin: 0;
+		padding: 0;
+	}
+	
+	a{
+		display: inline-block;
+		text-decoration: none;
+		color: #333;		
+		&:hover{
+			opacity: .75;
+		}
+	}
+	h3{
+		margin-left: .75em;
+	}
+}
+
+header, footer{
+	position: relative;
+	min-height: 100vh;
+	width: 100%;
+	background: @light;
+	& > *{
+		position: absolute;
+		top: 50%;
+		width: 100%;
+		transform: translateY(-50%);
+	}
+}
+
+footer{
+	margin-top: 50vh;
+}
+
+.header{
+	background: @light;
+}
+
+.the-end{
+	font-size: 4.5em;
+	font-weight: 800;
+	text-transform: uppercase;
+	text-align: center;
+}
