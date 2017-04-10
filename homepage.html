@@ -12,153 +12,15 @@
 		<header class="header" id="header">
 			<div>
 				<div class="wrap-inner">
-					<h1>JavaScript: 101 and Beyond</h1>
+					<h1>
+					Open the console :P<br>
+					<small style="font-size: .88em; font-weight: 500; letter-spacing: -.03em;">Ctrl + Shift + J</small>
+					</h1>
+
+					
 				</div>
 			</div>
 		</header>
-		<main class="main-area" id="main" v-cloak>
-			<content-section title="Introduction" level="2">
-				<p>JavaScript - formally called ECMAScript, is the language of the web. As such it is one of the most popular and perhaps the most misunderstood languages of our time.</p>
-				<ul>
-					<li>Is it a true programming or just a scripting language?</li>
-					<li>The name and syntaxic confusion.</li>
-					<li>Is it object oriented?</li>
-					<li>A weird cat: Lisp/Scheme in C’s clothing</li>
-				</ul>
-				<h3>Availability</h3>
-				<p>Embedded in every browser.</p>
-				<h3>Who?</h3>
-				<p>Copy pasters, Java/C# developers, JavaScript dedicated professionals.</p>
-				<p>This course will focus on version ES5, the current widely supported version. 
-					Versions 6 (and upcomming 7) through <strong>transpilers</strong> (ex: Babel, TypeScript).<br/>
-
-				</p>
-				<p>Note on <strong>Strict mode</strong></p>
-			</content-section>
-			<content-section title="Data Types" level="2">
-				<div class="group">
-					<h3>Primitive</h3>
-					<ul>
-						<li>undefined</li>
-						<li>null</li>
-						<li>boolean</li>
-						<li>number</li>
-						<li>string</li>
-					</ul>
-				</div>
-				<div class="group">
-					<h3>Referentials</h3>
-					<ul>
-						<li>Functions</li>
-						<li>Objects</li>
-						<li>Arrays</li>
-						<li>RegEx</li>
-					</ul>
-				</div>
-			</content-section>
-			<content-section title="Undefined" level="3">
-			<p>Undefined is global variable (window) with primitive type of <strong>undefined</strong>. It is returned when:</p>
-				<ul>
-					<li>variable is defined but not assigned value of type</li>
-					<li>checking <strong>typeof</strong> of undeclared variable</li>
-					<li>accessing non-existing property of object</li>
-					<li>function argument has been omitted in a call</li>
-					<li>function does not explicitly return a value</li>
-				</ul>
-			<p>Idea is to be a computed (returned) value.</p>
-			</content-section>
-			<content-section title="Null" level="3">
-			<p>The value null represents the intentional absence of any object value.</p>
-			<p>It is never returned by the compiler.</p>
-			<p>Calling <strong>typeof</strong> on a null value returns <strong>"object".</strong></p>			
-			</content-section>
-			<content-section title="Instanceof Operator" level="3">
-			</content-section>
-			<content-section title="Typeof Operator" level="3">
-				Example instance vs typeof
-				Exercise 1;
-			</content-section>
-			<content-section title="Comparing" level="3">
-			</content-section>
-
-			<content-section title="Assignment" level="3">
-				<p>Primitives are <strong>immutable</strong> and <strong>passed by value.</strong></p>
-<code>
-var obj = {};
-var a = 1; 
-var b = a;
-
-obj.a = a;
-a++;
-
-console.log(a);       <c>// "2"</c>
-console.log(b);       <c>// "1"</c>
-console.log(obj.b);   <c>// "1"</c>
-</code>
-	<p>Objects, by contrast, are <strong>mutable</strong> and <strong>passed by reference.</strong></p>
-<code>
-var obj = {x: "value", y: "value"};
-var obj2 = obj;
-obj.x = "different value";
-
-console.log(obj2);     <c>// {x: "different value", y: "value"}</c>
-console.log(obj);      <c>// {x: "different value", y: "value"}</c>
-	
-</code>
-			</content-section>
-			<content-section title="Implicit globals" level="3">
-				<code>
-					example
-					strict mode
-				</code>
-			</content-section>
-			<content-section title="Multiple declarations" level="3">
-				<code>
-					asdf
-				</code>
-			</content-section>
-<pre>
-(function($){
-	
-})(jQuery)
-</pre>		
-			<content-section title="Scope" level="2">
-				
-			</content-section>
-			<content-section title="Hoising" level="3">
-				
-			</content-section>
-			<content-section title="Referential Data Types" level="3">
-				asdasd
-			</content-section>
-			<content-section title="Logical Operators" level="2">
-<code>
-var world = "It's a big big world.";
-if ( world ) {
-   alert("Hello, World!");
-}
-</code>
-			</content-section>
-			<content-section title="Truthy & Falsy Values" level="3">
-				
-			</content-section>
-			<content-section title="Default Operator (OR)" level="3">				
-			</content-section>
-			<content-section title="Guard Operator (AND)" level="3">				
-			</content-section>
-<!-- 			<content-section title="NOT" level="3">				
-			</content-section> -->			
-		</main>
-		<button id="menu-open" class="js-fr-offcanvas-open" aria-controls="navigation"></button>		
-		<section class="js-fr-offcanvas" id="navigation">
-			<button class="js-fr-offcanvas-close" id="menu-close">
-				Close
-			</button>
-			<table-of-contents></table-of-contents>
-		</section>
-		<footer id="footer">
-			<div class="the-end">The End</div>
-		</footer>
 		<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 		<script src="_/ramda.min.js"></script>
 		<script src="_/froffcanvas.min.js"></script>
