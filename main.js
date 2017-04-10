@@ -281,3 +281,35 @@
 		
 	// 	return getter;
 	// }
+
+	// var O = function(v){
+	// 	// should have a public value property
+	// 	// public up method that increments the value ++ and cascades (returns this)
+	// 	// public down method that decrements the value -- and cascades
+	// 	// public low method logs the value property in the console
+	// }
+
+	// W = function(object){
+	// 	// create a two-step wrapper function that when called will call 
+
+	// 	// should return a named function 'R' with 'method' parameter
+	// 		// take all but the first argument of this function
+	// 		// access the method from the
+	// }
+
+	// var O = function(v){
+	// 	this.value = v;
+	// 	this.up = ()=>{this.value++ ; return this;},
+	// 	this.down = ()=>{this.value--; return this;},
+	// 	this.log = ()=>{console.log(this.value); return this;}		
+	// };
+
+	// var W = function(value){
+	// 	return function R(method){
+	// 		var args = Array.prototype.slice.call(arguments, 1);
+	// 		value[method].apply(value, args);
+	// 		return R;
+	// 	}
+	// }
+
+	// var asdf = W(O(10));
