@@ -271,8 +271,24 @@
 
 
 
+	// ====================== //
+	// === EXERCISE MAYBE === //
+	// ====================== //
 
-
+	// Create a curried (Ramda) sum function x+y
+	// Create a increment function by partially applying the function with 1
+	
+	// Create a curried modulus function 'mod'
+	var mod;
+	// create a isOdd function by partially appying the mod function
+	var isOdd;
+	// create a not function
+	var not;
+	// create is even function by composing/pipeing the 'isOdd' and 'not' functions 
+	var isEven;
+	// bonus: make the isOdd function by composing (or pipeing)
+	var odd;
+	
 	// ====================== //
 	// === EXERCISE NEVER === //
 	// ====================== //
