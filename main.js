@@ -638,3 +638,60 @@ var mac = app.Module('Matz', [], function(_){
 app.Module('asdeee', [], function(_){
 	return {Dane : _.Class('Dane', {constructor: function(){}, extends: Function })}
 })
+
+
+
+var Class = (function(){
+
+	var doNothing = new Function;
+	
+	var n = Object.freeze({
+		extends : doNothing,
+		methods : doNothing,
+		constructor : doNothing
+	});
+
+	var _ = Object.freeze({
+		extends : function(extends){
+			this.__extends = extends;
+		},
+		methods : function(methods){
+			var scope = this;
+			objectMap(methods, function(name, method){
+				scope[name] = method;
+			});
+		},
+		constructor : function(constructor){
+			this.__constructor = constructor;
+		}
+	});
+		
+	var instantiate = R.curry(function(__class, __){
+		return function(){
+			var o = new __class;
+			__extends && __extends.apply(o, arguments);
+			__constructor && __constructor.apply(o, arguments);
+			return o;
+		};
+	});
+
+	return function(classFn){
+		var _ = Object.create(_); 
+		classFn.call(classFn, _);
+
+		return instantiate;
+	}
+});
+
+
+Class(function Goxi(_){
+	_.extends(Programmer);
+	_.constructor(function(){
+
+	});
+	_.methods({
+		run: function(){
+			console.log('Go run!')
+		}
+	});
+});
