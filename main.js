@@ -695,3 +695,18 @@ Class(function Goxi(_){
 		}
 	});
 });
+
+
+var module = (function(){
+	var modules = {};
+	var getModules = function(mArr){
+		var m = [];
+		mArr.keys().forEach(function(name){
+			modules[name] && m.push(modules[name])
+		});
+		return m;
+	};
+	return funcion(name, deps, module){
+		modules[name] = module.call(null, getModules(deps));
+	}
+})();
