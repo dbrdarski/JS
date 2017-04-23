@@ -323,7 +323,6 @@
 	// 	};
 		
 	// 	return getter;
-<<<<<<< HEAD
 	// }
 
 	// var Module = function(name, fn){
@@ -522,6 +521,3 @@ var module = (function(){
 		modules[name] = module.call(null, getModules(deps));
 	}
 })();
-=======
-	// }
->>>>>>> parent of 0b261b6... Added modules
