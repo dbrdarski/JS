@@ -1,181 +1,13 @@
-(function(global){
-
-	var getValuesForKeys = R.curry(function(dataObj, params){
-		return params.map(function(x){
-			return dataObj[x];
-		});
-	});
-
-	var addObjProp = function(obj, prop, expression){
-		Object.defineProperty(obj, prop, {
-			value : expression,
-			writable: false
-		});		
-	}
-
-var Sniffer = function(subscriptions){
-	var snifferList = {};
-	return {
-		test : function(prop, handler){
-			var o = Object.create(snifferList);
-			Object.defineProperty(o, '__prop__', {value : prop, writable : false});
-			Object.defineProperty(o, '__handler__', {value : handler, writable : false});
-			return o;
-		},
-		add : function(prop){
-			Object.defineProperty(snifferList, prop, { get: function(){
-				// console.log('SNIFFED', prop, [this.__prop__, this.__handler__]);
-				subscriptions[prop][this.__prop__] = this.__handler__;
-			}});
-		}
-	};
-}
-
-	var mapObj = function(obj, fn){
-		Object.keys(obj).forEach(fn);
-	};
-
-	var Computed = function(fn, value){
-		return {
-			value : function(){
-				return value;
-			},
-			calculate : function(){
-				// console.log('B',value);
-				value = fn();
-				// console.log('A',value);
-			}
-		}
-	}
-
-	var Data = function(d, c){
-
-		var data = {},
-			subscriptions = {},
-			sniffer = Sniffer(subscriptions);
-
-		mapObj(d, function(prop){
-
-			subscriptions[prop] = {};
-			sniffer.add(prop);
-
-			Object.defineProperty(data, prop, {
-				set: function(x){
-					d[prop] = x;
-					objectMap(function(v,k){k();}, subscriptions[prop]);
-					// this[prop] = x;
-					// return x;
-				},
-				get: function(){
-					return d[prop];
-				}
-			});
-
-			// data[prop] = d[prop];		
-			// console.log("CREATED", [prop, data[prop]]);
-		});
-			// initComputed(str) =>
-
-		objectMap(c, function(prop, fn){
-			var computed = Computed(fn.bind(data));
-			var s = sniffer.test(prop, computed.calculate);
-
-			fn.call(s);
-
-			Object.defineProperty(data, prop, {
-				get : function(){
-					return computed.value();
-				}
-			});
-			computed.calculate();
-			// console.log("CREATED", [prop, computed.value()]);
-		});
-
-		return data;
-	};
-
-	var Module = function(scope, name, deps, module){
-		var getModules = getValuesForKeys(scope);
-
-		if(scope.hasOwnProperty(name)){
-			throw Error('you die!!!');
-		}
-		
-		var _ = Object.create(scope);
-		
-		var m = module.bind(null, _).apply(null, getModules(deps));
-
-		return scope[name] = m;
-	};
-
-	var Component = function(module, name, component){
-		module[name] = {};
-		
-		var data = component.data || {},
-			computed = component.data || {}
-		;
-
-
-	}
-
-	var Class = function(module, name, _class){
-
-		var _extends = typeof _class.extends === 'string' ? module[_class.extends] : _class.extends;
-		// console.log([_class.extends, module[_class.extends]]);
-
-		_f = function(){
-			_extends && _extends.apply(this, arguments);
-			_class.constructor && _class.constructor.apply(this, arguments);
-		};
-
-		eval("var fn = function "+name+"(){_f.apply(this, arguments);}");		
-
-		_f.prototype = _extends ? Object.create(_extends.prototype) : _f.prototype;
-		_class.methods && Object.keys(_class.methods).map(function(x){
-			_f.prototype[x] = _class.methods[x];
-		});
-
-		module[name] = _f;
-
-		return fn;
-	};	
-
-	global.Class = Class.bind(global);
-	global.app = Module({}, 'App', [], function(_){
-		
-		var app = {};
-
-		addObjProp(_, "Class", Class.bind(null, {}));
-		addObjProp(app, "Module", Module.bind(null, _));
-
-		app.log = function(){ return _; };
-
-		return app;
-
-	});
-})(window);
-
-(function(global){
-
 	
 	// ====================== //
 	// === UTIL FUNCTIONS === //
 	// ====================== //
 
-	app.Module('Utils', [], function(){
-		return {
-			randomBoolean : function(){
-				return Math.random() >= 0.5;
-			},
-			randomInterval : function(first, second){
-				var single = arguments.length < 2;
-				var len = single ? first : second - first;
-				var offset = single ? 0 : first;
-				return Math.random() * len + offset;
-			}
-		}	
-	});
-
+	var U = {
+		randomBoolean : function(){
+			return Math.random() >= 0.5;
+		}
+	};
 
 
 	// ================== //
@@ -194,35 +26,26 @@ var Sniffer = function(subscriptions){
 	// === EXERCISE 2 === //
 	// ================== //
 
-	app.Module('EX2', ['Utils'], function(_, U){
 
-		var randomData = function(){
-			if( U.randomBoolean() ){
-				return { work_experience : { company: { name: 'ACME', from: '15/03/2015' } } }
-			} else {
-				return { voluteering: { organization: { name: 'Mozilla', from: '21/04/2013', to: '24/04/2014' } } }
-			}
-		};
+	var randomData = function(){
+		if( U.randomBoolean() ){
+			return { work_experience : { company: { name: 'ACME', from: '15/03/2015' } } }
+		} else {
+			return { voluteering: { organization: { name: 'Mozilla', from: '21/04/2013', to: '24/04/2014' } } }
+		}
+	};
 
-		var getCompanyName = function(personData){
-			
-			// TODO: Return the name of company or false value;
+	var getCompanyName = function(personData){
+		
+		// TODO: Return the name of company or false value;
 
-		};
+	};
 
-		var candidates = {
-			mark : getCompanyName(randomData()),
-			john : getCompanyName(randomData()),
-			jenny : getCompanyName(randomData())
-		};
-
-		// global.bsd = new Bsd;
-
-		return {
-			getCompanyName : getCompanyName,
-			candidates : candidates
-		};
-	});
+	var candidates = {		
+		mark : getCompanyName(randomData()),
+		john : getCompanyName(randomData()),
+		jenny : getCompanyName(randomData())
+	}
 
 
 	// ================== //
@@ -287,16 +110,6 @@ var Sniffer = function(subscriptions){
 			}, delay);
 		}
 	}
-
-	// global.z = function(name, _){
-
-	// 	return (new function(){
-	// 		this[name] = function(){
-	// 			// _.extends && _.extends.call(this);
-	// 			// _.constructor && _.constructor.call(this);
-	// 		};
-	// 	});
-	// };
 
 	var carmack = Programmer({name: "John Carmack", level: "demigod"});
 
@@ -389,13 +202,11 @@ var Sniffer = function(subscriptions){
 	// Implement objectMap function
 
 	function objectMap(fn, obj){
-		var O = new Object;
-		Object.keys(obj).forEach(function(x){
-			O[x] = fn(x, obj[x]);
-		});
+		// iterate object properties, skip inherited properties
+		// apply function to each property key and value
+		// return results as new object
 	}
 
-	global.objectMap = objectMap;
 
 	// =================== //
 	// === EXERCISE 13 === //
@@ -512,6 +323,7 @@ var Sniffer = function(subscriptions){
 	// 	};
 		
 	// 	return getter;
+<<<<<<< HEAD
 	// }
 
 	// var Module = function(name, fn){
@@ -710,3 +522,6 @@ var module = (function(){
 		modules[name] = module.call(null, getModules(deps));
 	}
 })();
+=======
+	// }
+>>>>>>> parent of 0b261b6... Added modules
